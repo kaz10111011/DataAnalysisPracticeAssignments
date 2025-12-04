@@ -1,4 +1,4 @@
-from IPython.display import display,Markdown 
+from IPython.display import display, Markdown
 import numpy as np
 from scipy import stats
 from matplotlib import pyplot as plt
@@ -58,18 +58,6 @@ def display_dispersion_table(num=1):
 
 
 
-y    = pa.df['Happiness']
-GDP  = pa.df['GDP']
-SS   = pa.df['Social Support']
-HE   = pa.df['Health']
-FR = pa.df['Freedom']
-GE = pa.df['Generosity']
-
-
-SS1 = np.around(2*SS, 1)
-
-
-
 
 def corrcoeff(x, y):
     mask = ~np.isnan(x) & ~np.isnan(y)
@@ -90,8 +78,16 @@ def plot_regression_line(ax, x, y, **kwargs):
 
 
 
-def plot_descriptive():
+def plot_descriptive(df):
     
+    y    = df['Happiness']
+    GDP  = df['GDP']
+    SS   = df['Social Support']
+    HE   = df['Health']
+    FR = df['Freedom']
+    GE = df['Generosity']
+    SS1 = np.around(2*SS, 1)
+
     fig,axs = plt.subplots( 2, 3, figsize=(8,6), tight_layout=True )
     ivs     = [GDP, SS, HE, FR, GE]
     colors  = 'b', 'r', 'g','y' ,'orange'

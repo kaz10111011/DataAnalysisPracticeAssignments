@@ -78,7 +78,7 @@ def plot_regression_line(ax, x, y, **kwargs):
 
 
 
-def plot_descriptive(df):
+def define_variables(df):
     
     y    = df['Happiness']
     GDP  = df['GDP']
@@ -87,6 +87,9 @@ def plot_descriptive(df):
     FR = df['Freedom']
     GE = df['Generosity']
     SS1 = np.around(2*SS, 1)
+    return y, GDP, SS, HE, FR, GE, SS1
+
+def plot_descriptive(y, GDP, SS, HE, FR, GE, SS1 ):
 
     fig,axs = plt.subplots( 2, 3, figsize=(8,6), tight_layout=True )
     ivs     = [GDP, SS, HE, FR, GE]
@@ -113,7 +116,7 @@ def plot_descriptive(df):
     ylocs    = 0.3, 0.7
     for i,c,s,qs,yloc in zip([i_low, i_high], fcolors, labels, q_groups, ylocs):
         ax.scatter( SS[i], y[i], alpha=0.5, color=c, facecolor=c, label=s )
-        plot_regression_line(ax, SS[i], y[i], color=c, ls='-', lw=2)
+        plot_regression_line(ax, SS[i], y[i], color='k', ls='-', lw=2)
         [ax.plot(SS[i].mean(), q, 'o', color=c, mfc='w', ms=10)  for q in qs]
         r   = corrcoeff(SS[i], y[i])
         ax.text(0.7, yloc, f'r = {r:.3f}', color=c, transform=ax.transAxes, bbox=dict(color='0.8', alpha=0.7))
